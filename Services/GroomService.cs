@@ -20,4 +20,14 @@ public class GroomService : Groom.GroomBase
         var resp = new RoomRegistrationResponse { RoomId = roomNum };
         return Task.FromResult(resp);
     }
+
+    public override async Task<NewsStreamStatus> SendNewsFlash(IAsyncStreamReader<NewsFlash> newsStream, ServerCallContext context)
+    {
+        while(await newsStream.MoveNext()){
+            var news=newsStream.Current;          
+            Console.WriteLine($"News flash: {news.NewsFlash_}");
+        }
+
+        return new NewsStreamStatus{Success=true};
+    }
 }
