@@ -16,7 +16,7 @@ message RoomRegistrationResponse {
 
 message NewsFlash {
     google.protobuf.Timestamp new_time=1;
-    string NewsFlash=2;
+    string news_item=2;
 }
 message NewsStreamStatus {
     bool success=1;

@@ -25,7 +25,7 @@ public class GroomService : Groom.GroomBase
     {
         while(await newsStream.MoveNext()){
             var news=newsStream.Current;          
-            Console.WriteLine($"News flash: {news.NewsFlash_}");
+            Console.WriteLine($"News flash: {news.NewsItem}");
         }
 
         return new NewsStreamStatus{Success=true};
