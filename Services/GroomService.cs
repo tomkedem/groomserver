@@ -15,8 +15,7 @@ public class GroomService : Groom.GroomBase
     }
 
     public override async Task<RoomRegistrationResponse> RegisterToRoom(RoomRegistrationRequest request, ServerCallContext context)
-    {
-        await Task.Delay(10000);
+    {        
         UsersQueues.CreateUserQueue(request.RoomName, request.UserName);
         var resp = new RoomRegistrationResponse() { Joined = true };
         return await Task.FromResult(resp);
@@ -83,6 +82,9 @@ public class GroomService : Groom.GroomBase
         {
             while (true)
             {
+                if(context.CancellationToken.IsCancellationRequested){
+                    return;
+                }
                 var userMsg = UsersQueues.GetMessageForUser(userName);
                 if (userMsg != null)
                 {
